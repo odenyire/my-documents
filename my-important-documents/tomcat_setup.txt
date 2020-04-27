@@ -1,0 +1,56 @@
+0	1.  yum update
+	2.  yum install java-1.8*
+    	3.  java -version
+    	4.  vi .bash_profile
+    	5.  source .bash_profile
+    	6.  cd /opt
+	7.  yum install wget
+	8.  wget https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz
+	9.  tar -xzvf apache-tomcat-8.5.41.tar.gz
+	10. cd apache-tomcat-8.5.41
+	11. cd bin/
+	12. ps -ef | grep tomcat
+	13. ls -ltr
+	14. chmod +x startup.sh
+	15. chmod +x shutdown.sh
+	16. pwd
+	17. echo $PATH   -- CHECK HERE usr/local/bin OR usr/bin
+	18. ln -s /opt/apache-tomcat-8.5.41/bin/startup.sh /usr/bin/tomcatup
+	19. ln -s /opt/apache-tomcat-8.5.41/bin/shutdown.sh /usr/bin/tomcatdown
+	20. tomcatup     -- GO AND OPEN ON BROWSER WITH <PUBLICIP>8080 PORT
+	21. ps-ef | grep tomcat
+	22. cd ..
+	23. cd conf/
+	24. vi server.xml    --IN THIS COMMAND WE CHANGE PORT NUMBER AT <CONECTOR PORT="8090"
+	25. tomcatdown 
+	26. tomcatup
+	
+BY DEFAULT MANAGER IS ONLY ACCESSABLE FROM A BROWSER RUNNING ON SAME MACHINE AS TOMCAT. IF YOU WISH TO MODIFY THIS RESTRICTION YOU WILL NEED TO COMMENT ON CONTEXT.XML FILE
+	27. find / -name context.xml
+  	28. vi /opt/apache-tomcat-8.5.41/webapps/host-manager/META-INF/context.xml   --- [ <!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+        													 allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->]
+										     ---  ADD [<!--] THIS BEFORE VALVE AND AT LAST [-->] ADD THIS
+	29. vi /opt/apache-tomcat-8.5.41/webapps/manager/META-INF/context.xml
+	30. tomcatdown
+	31. tomcatup
+	/conf 32. vi tomcat-users.xml
+
+<tomcat-users>
+
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+<user username="deployer" password="deployer" roles="manager-script"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+<role rolename="admin-gui"/>
+<user username="tomcat" password="s3cret" roles="admin-gui"/>
+
+</tomcat-users>
+	33. tomcatdown
+	34. tomcatup
+OPEN BROWSER AND CHECK MANAGER APP AND REMAINING OPTIONS
+	
+
+	

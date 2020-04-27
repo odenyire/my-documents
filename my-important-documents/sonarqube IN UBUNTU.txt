@@ -1,0 +1,58 @@
+
+			sonarqube setup "ubuntu"
+			=======================
+    1  sudo apt-get update
+    2  sudo apt-get -y upgrade
+JAVA INSTALL:
+=============
+    3  sudo add-apt-repository ppa:webupd8team/java
+    4  sudo apt-get update
+    5  sudo apt install openjdk-8-jdk
+verify java installed or not
+    6  java -version
+    6.1 sudo apt-get install openjdk-8-set-default
+environment variable
+==================== 
+    7  vi /etc/environment
+JAVA_HOME=/usr/lib/jvm/openjdk-8-jdk
+JRE_HOME=/usr/lib/jvm/openjdk-8-jdk/jre
+    8  apt-get install unzip -y
+SONARQUBE INSTALL:
+=================
+    9  wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.4.zip
+   10  ls
+   11  unzip sonarqube-6.4.zip
+   12  ls
+   13  mv sonarqube-6.4 /opt/sonarqube
+   14  cd
+   15  sudo vi /etc/systemd/system/sonar.service
+
+[Unit]
+Description=SonarQube service
+After=syslog.targetnetwork.target
+[Service]
+Type=forking
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+User=root
+Group=root
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+
+   16  cd
+START APPLICATION BY RUNNING:
+   17  sudo systemctl start sonar
+ENABLE THE SONARQUBE SERVICE TO AUTOMATICALLY START AT BOOT TIME.
+   18  sudo systemctl enable sonar
+TO CHECK IF SERVICE IS RUNNING , RUN;   
+   19  sudo systemctl status sonar
+
+ACCESS THE SONARQUBE WITH
+http://<ipaddress>:9000
+
+
+A DEFAULT USER WITH ADMINISTER SYSTEM PERMISSION IS CREATED AUTOMATICALLY
+Login : admin
+Password : admin

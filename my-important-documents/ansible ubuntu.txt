@@ -1,0 +1,129 @@
+                               ANSIBLE INSTALLATION IN UBUNTU
+                               ==============================
+-IN ACS SERVER 
+1.1    vi /etc/ssh/sshd_config                                 {--CHANGE PERMIT ROOT LOGIN : PROHIBITED PASSWORD TO YES && PASSWORD AUTHENTICATION NO TO YES }
+    2  service ssh restart
+    3  service ssh status
+   {4  passwd root}
+    5  adduser ansible		
+    6  visudo
+ansible ALL=(ALL:ALL) NOPASSWD:ALL  		--PASTE THIS BELOW THE ROOT PREVILAGES
+    7  su - ansible
+-----------------------------------------------------------------------------------------
+2.1    sudo apt update
+    2  sudo apt install software-properties-common
+    3  sudo apt-add-repository ppa:ansible/ansible
+    4  sudo apt update
+    5  sudo apt install ansible
+    6  ansible --version
+    7  python --version
+    8  ssh-keygen                                       --IT COPY GENERATES PUBLIC AND PRIVATE KEY INTERNALLY(USER OR SERVER)
+    9  ssh-copy-id ansible@172.31.4.106        ssh-copy-id ansible@PRIVATEIP    IT SHOWS 1  KEY ADDED LIKE THAT
+  9.1  ssh-copy-id ansible@172.31.81.164
+  9.2  ssh-copy-id ansible@172.31.94.108
+   10  sudo vi /etc/ansible/hosts                  1.ansible.cfg  2.hosts  3.roles
+PASTE PRIVATE IP AT BOTTOM
+   11  ansible -m ping all
+   12  cd
+   13  mkdir playbooks
+   14  cd playbooks
+   15  vi gitinstall.yml                             
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: installing git
+    apt:
+      name: git
+      state: present
+    16  ansible-playbook gitinstall.yml        ---WHILE USING THIS CMD IT GIVE LATE OUTPUT WHY BECAUSE IT CHECKS GATHERING FACTS
+    17  vi apache2.yml
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install apache server
+    apt:
+      name: apache2
+      state: present
+     18  ansible-playbook apache2.yml
+     19  vi apache2.yml
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install apache server
+    apt:
+      name: apache2
+      state: present
+  - name: Ensure apache service in running
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+   20  ansible-playbooks apache2.yml
+   21  apache2 -version
+   22  service apache2 status               ???
+   23  service apache2 restart              ???
+   24  sudo systemctl status apache2        ???
+   25  cd
+   26  vi hosts
+   27  sudo vi hosts
+   28  cd
+   29  vi hosts        -WE CREATE THIS FOR DYNAMIC INVENTORY OR CUSTOMIZED INVENTORY (PATH: /)--hosts file
+                       -AND ALSO SYSTEM PROVIDED INVENTORY (PATH: /ETC/ANSIBLE)--hosts file
+[webservers]
+localhost
+
+[applicationservers]
+172.31.81.164
+
+[dbservers]
+172.31.94.108
+
+[ubuntu]
+localhost
+172.31.81.164
+172.31.94.108
+   30  ansible -i hosts -m ping webservers              |
+   31  ansible -i hosts -m ping ubuntu                  |FOR THIS COMMAND WE USE -I(INVENTORY) COMMAND MEANS (CUSTOMIZED INVENTORY OR CREATED HOSTS FILE) WE MUST USE
+   32  ansible -i hosts -m ping applicationservers      |THIS "-i hosts"
+   33  ansible -i hosts -m ping dbservers               |
+   34  ansible -i hosts -m setup webservers
+          {when: ansible_facts['os_family'] == "Debian"}--BELOW THE MODULE EXACTLY   --WE USE THIS LINE WHEN
+          {when: ansible_facts['os_family'] == "CentOS"}
+          {when: ansible_facts['os_family'] == "RedHat"}
+
+   35 {ADHOC COMMANDS FOR EXAMPLE INSTALL GIT IN ALL SERVERS 
+       $ansible -m apt -a "name=git state=present" all   ----HERE {"-m=module" of apt "-a=aurgument" tasks in playbooks "all=hosts"}
+   36  $ansible -i hosts -m apt -a "name=git state=present" webservers   ---HERE WE CATEGIRISED SERVERS
+   37  when: ansible_facts['os_family'] == "Debian"   --WE USE THIS LINE WHEN
+                                                          
+=================================================================================================================================
+
+-IN NODE SERVER
+1.1    vi /etc/ssh/sshd_config                                 --CHANGE PERMIT ROOT LOGIN : PROHIBITED PASSWORD TO YES && PASSWORD AUTHENTICATION NO TO YES
+    2  service ssh restart
+    3  service ssh status
+    4  passwd root
+    5  adduser ansible		
+    6  visudo
+ansible ALL=(ALL:ALL) NOPASSWD:ALL  		--PASTE THIS BELOW THE ROOT PREVILAGES
+    7  su - ansible
+-----------------------------------------------------------------------------------------
+2.1    sudo apt update
+    2  sudo apt install software-properties-common
+    3  sudo apt-add-repository ppa:ansible/ansible
+    4  sudo apt update
+    5  sudo apt install python
+    6  python --version
+
+=================================================================================================================================
+ 
+   
+   
+
+
+
+
+

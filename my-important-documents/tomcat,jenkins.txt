@@ -1,0 +1,70 @@
+    1  apt update
+    1.1 sudo apt search openjdk
+    2  sudo add-apt-repository ppa:webupd8team/java
+    3  sudo apt-get update
+    4  sudo apt install openjdk-8-jdk
+    5  java -version
+    6  sudo apt install -y maven git
+    7  git --version
+    8  mvn --version
+    9  history
+   10  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+   11  vim /etc/apt/sources.list       ---PASTE THIS AT BOTTOM LINE (deb https://pkg.jenkins.io/debian binary/)
+   12  sudo apt-get update
+   13  sudo apt-get install jenkins    ---DOWNLOAD WAR FILE AND INSTALLING PACKAGE
+   14  sudo systemctl start jenkins
+   15  sudo systemctl status jenkins
+   16  cd  /opt
+   17  ls
+   18  wget http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.42/bin/apache-tomcat-8.5.42.tar.gz
+   19  ls
+   20  tar -xzvf apache-tomcat-8.5.42.tar.gz
+   21  ls
+   22  cd apache-tomcat-8.5.42/
+   23  ls
+   24  cd conf/
+   25  ls
+   26  vim server.xml
+   27  ls
+   28  cd ..
+   29  ls
+   30  cd bin/
+   31  ps -ef | grep tomcat
+   32  ls -ltr
+   33  chmod +x startup.sh
+   34  ls -ltr
+   35  chmod +x shutdown.sh
+   36  echo $PATH
+   36.1 cd
+   37  ln -s /opt/apache-tomcat-8.5.42/bin/startup.sh /usr/bin/tomcatup
+   38  ln -s /opt/apache-tomcat-8.5.42/bin/shutdown.sh /usr/bin/tomcatdown
+   39  tomcatup
+   40  cd /opt
+   41  ls
+   
+   43  find / -name context.xml
+   44  vim /opt/apache-tomcat-8.5.42/webapps/host-manager/META-INF/context.xml
+   45  vim /opt/apache-tomcat-8.5.42/webapps/manager/META-INF/context.xml
+   46  cd apache-tomcat-8.5.42/
+   47  ls
+   48  cd conf/
+   49  cd
+   50  find / -name tomcat-users.xml
+   51  vim /opt/apache-tomcat-8.5.42/conf/tomcat-users.xml
+<tomcat-users>
+
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+<user username="deployer" password="deployer" roles="manager-script"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+<role rolename="admin-gui"/>
+<user username="tomcat" password="s3cret" roles="admin-gui"/>
+
+</tomcat-users>
+   52  vim /opt/apache-tomcat-8.5.42/conf/tomcat-users.xml
+   53  tomcatdown
+   54  tomcatup
+   55  cat /var/lib/jenkins/secrets/initialAdminPassword

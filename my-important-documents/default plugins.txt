@@ -1,0 +1,155 @@
+Trilead API
+Folders
+Oracle Java SE Development Kit Installer
+Script Security
+Command Agent Launcher
+Structs
+Pipeline: Step API
+SCM API
+Pipeline: API
+JUnit
+bouncycastle API
+OWASP Markup Formatter
+Token Macro
+Build Timeout
+Credentials
+Plain Credentials
+SSH Credentials
+Credentials Binding
+Timestamper
+Pipeline: Supporting APIs
+Durable Task
+Pipeline: Nodes and Processes
+Matrix Project
+Resource Disposer
+Workspace Cleanup
+Ant
+JavaScript GUI Lib: ACE Editor bundle
+JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)
+Pipeline: SCM Step
+Pipeline: Groovy
+Pipeline: Job
+Apache HttpComponents Client 4.x API
+Display URL API
+Mailer
+Pipeline: Basic Steps
+Gradle
+Pipeline: Milestone Step
+Jackson 2 API
+Pipeline: Input Step
+Pipeline: Stage Step
+Pipeline Graph Analysis
+Pipeline: REST API
+JavaScript GUI Lib: Handlebars bundle
+JavaScript GUI Lib: Moment.js bundle
+Pipeline: Stage View
+Pipeline: Build Step
+Pipeline: Model API
+Pipeline: Declarative Extension Points API
+JSch dependency
+Git client
+GIT server
+Pipeline: Shared Groovy Libraries
+Branch API
+Pipeline: Multibranch
+Authentication Tokens API
+Docker Commons
+Docker Pipeline
+Pipeline: Stage Tags Metadata
+Pipeline: Declarative Agent API
+Pipeline: Declarative
+Lockable Resources
+Pipeline
+GitHub API
+Git
+GitHub
+GitHub Branch Source
+Pipeline: GitHub Groovy Libraries
+Pipeline: Stage View
+Git
+MapDB API
+Subversion
+** - required dependency
+
+
+
+
+
+Trilead API	 Success
+Folders	 Success
+Oracle Java SE Development Kit Installer	 Success
+Script Security	 Success
+Command Agent Launcher	 Success
+Structs	 Success
+Pipeline: Step API	 Success
+SCM API	 Success
+Pipeline: API	 Success
+JUnit	 Success
+bouncycastle API	 Success
+OWASP Markup Formatter	 Success
+Token Macro	 Success
+Build Timeout	 Success
+Credentials	 Success
+Plain Credentials	 Success
+SSH Credentials	 Success
+Credentials Binding	 Success
+Timestamper	 Success
+Pipeline: Supporting APIs	 Success
+Durable Task	 Success
+Pipeline: Nodes and Processes	 Success
+Matrix Project	 Success
+Resource Disposer	 Success
+Workspace Cleanup	 Success
+Ant	 Success
+JavaScript GUI Lib: ACE Editor bundle	 Success
+JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)	 Success
+Pipeline: SCM Step	 Success
+Pipeline: Groovy	 Success
+Pipeline: Job	 Success
+Apache HttpComponents Client 4.x API	 Success
+Display URL API	 Success
+Mailer	 Success
+Pipeline: Basic Steps	 Success
+Gradle	 Success
+Pipeline: Milestone Step	 Success
+Jackson 2 API	 Success
+Pipeline: Input Step	 Success
+Pipeline: Stage Step	 Success
+Pipeline Graph Analysis	 Success
+Pipeline: REST API	 Success
+JavaScript GUI Lib: Handlebars bundle	 Success
+JavaScript GUI Lib: Moment.js bundle	 Success
+Pipeline: Stage View	 Success
+Pipeline: Build Step	 Success
+Pipeline: Model API	 Success
+Pipeline: Declarative Extension Points API	 Success
+JSch dependency	 Success
+Git client	 Success
+GIT server	 Success
+Pipeline: Shared Groovy Libraries	 Success
+Branch API	 Success
+Pipeline: Multibranch	 Success
+Authentication Tokens API	 Success
+Docker Commons	 Success
+Docker Pipeline	 Success
+Pipeline: Stage Tags Metadata	 Success
+Pipeline: Declarative Agent API	 Success
+Pipeline: Declarative	 Success
+Lockable Resources	 Success
+Pipeline	 Success
+GitHub API	 Success
+Git	 Success
+GitHub	 Success
+GitHub Branch Source	 Success
+Pipeline: GitHub Groovy Libraries	 Success
+Pipeline: Stage View	 Success
+Git	 Success
+MapDB API	 Success
+Subversion	 Success
+SSH Slaves	 Success
+Matrix Authorization Strategy	 Success
+PAM Authentication	 Success
+LDAP	 Success
+Email Extension	 Success
+Mailer	 Success
+Maven Invoker

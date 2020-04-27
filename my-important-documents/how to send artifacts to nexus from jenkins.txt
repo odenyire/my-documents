@@ -1,0 +1,60 @@
+1.	download nexus platform plugin then you get option of  (a) in MANAGE JENKINS--> CONFIGURATION SYSTEM -> YOU GET Sonatype Nexus TAB
+														IN THAT display name : manikanta  (NEW)
+															server id    : 9959843666  (NEW)
+															SERVER URL   : http://35.154.222.42:8081/nexus/
+															CREDENTIALS  : admin
+																       admin123
+															APPLY&SAVE   
+								(b) in project configure-> BUILD -> YOU GET Nexus Repository Manager Publisher ---SEE 5
+												   
+															 
+2.	add create 2 repositories   (a)	Repository ID   :	manikantarelease  
+					Repository name :	manikantarelease
+					RepositoryPolicy ;      select (release)
+ 				    (b) Repository ID   :	manikantasnapshot  
+					Repository name :	manikantasnapshot
+					RepositoryPolicy ;      select (snapshot)
+
+3.	add this to pom.xml file in git hub repository project
+
+
+<distributionManagement>
+         
+         <repository>
+                  <id>releases</id>
+                  <name>Releases</name>
+                  <url>http://35.154.222.42:8081/nexus/content/repositories/releases/</url>
+          </repository>
+          
+          <snapshotRepository>
+                  <id>snapshots</id> 
+                  <name>Snapshots</name>
+                  <url>http://35.154.222.42:8081/nexus/content/repositories/snapshots/</url>
+          </snapshotRepository>
+
+</distributionManagement> 
+
+4.	add this to pom.xml in (find / -name conf) 
+	in setting.xml in maaven add below to server
+ -->
+     <server>
+      <id>9959843666</id>
+      <username>admin</username>
+      <password>admin123</password>
+     </server>
+
+     <server>
+      <id>snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+     </server>
+
+5.	(1)(b) in project configure-> BUILD -> YOU GET Nexus Repository Manager Publisher 
+						add nexus instance : select manikanta
+						    nexus repository : select releases
+								group    :	|
+								artifact :	|SEE IN POM.XML FILE AND ENTER THAT HERE
+								version  :	|
+								packaging : war
+
+   

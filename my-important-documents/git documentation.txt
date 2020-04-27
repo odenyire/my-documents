@@ -1,0 +1,295 @@
+                                 COMMUNICATION WITH BIT BUCKET AND HOW TO PUSH AND PULL THE CODE 
+                                 ===============================================================
+
+  1    git init    	-- THIS COMMAND CREATES .GIT HIDDEN FOLDER
+  2    ls -la		-- TO CHECK HIDDEN FILES  
+  3    ssh-keygen	-- TO COMMUNICATE WITH REMOTE REPOSITARY WE USE THIS COMMAND AND IT GENERATES KEY THEN WE CONFIGURE IN BIT BUCKET & SECURE SHELL TO SEND CODE
+  4    cat /c/Users/mvreddychintha/.ssh/id_rsa.pub		-- COPY THIS PUBLIC KEY AND PASTE AT(GO TO BITBUCKET >> SETTINGS >> ACCESS KEY >> ADD KEY 
+		The first thing you should do when you install Git is to set your user name and email address. This is important because every Git commit uses this 			information, and it’s immutably baked into the commits you start creating
+  5    git config --global user.name "mani"		-- EVERYTIME DEVELOPER PUSH AND PULL FOR IDENTITY 
+  6    git config --global user.email "mvreddychintha@gmail.com"
+  7    git --config list		-- IT SHOWS LIST OF USERS
+  		[ "GLOBAL" IS FOR ONE MACHINE IT WILL RECIEVE ONE NAME , "LOCAL" IS FOR WE ARE ABLE TO GIVE EACH PROJECT FOR EACH USER
+  		7.1  git config --local user.name "vempa"
+  		7.2  git config --local user.email "vempa@gmail.com"
+  		7.3  git config --list     ]
+  
+  8    git remote add origin https://mvreddychintha@bitbucket.org/mvreddychintha/sbi-project.git  -- THIS URL FROM BITBUCKET PROJECT BRANCH
+           											     IT ADD REMOTE & RENAME THAT URL AS ORIGIN 
+  9    git remote -v   -- IT SHOWS PATH OF REMOTE LIKE WHERE TO PUSH AND WHERE TO FETCH
+  10   git clone https://mvreddychintha@bitbucket.org/mvreddychintha/sbi-project.git    --GETTING PROJECT FROM BIT BUCKET
+  11   ls
+  12   cd sbi-project/
+  13   ls
+  14   git status	-- IN RED COLOUR WORDS IT IS UNTRACKED FILES(READY TO COMMIT)
+ 			-- IN GREEN COLOUR WORDS IT IS TRACKED FILES(ALL READY COMMITED OR READY TO ADD)
+			-- IF NOT IT SHOWS NOTHING TO COMMIT WORKING TREE CLEAN
+  15   git add .        --(.) REPRESENTS ALL FILES OTHERWISE WE NEED TO SELECT INDIVIDUALLY & (add) FILES WILL SAVE IN STAGGING AREA
+			[  THIS COMMAND CHANGED FROM TRACKED FILES TO UNTRACKED FILES 
+			 15.1  git rm --cached <FILENAME>]   
+  16   git commit -m"my first commit"	-- FILES WILL ADD IN LOCAL REPO .git & IT CREATES ONE COMMIT ID
+			[16.1 git log   -- IT SHOWS COMMIT ID (40 DIGIT ALPHANUMERIC ID) & AUTHOR NAME & DATE,TIME,NO OF FILES ADDED]   
+  17   git status
+  18   git pull origin master		-- BEFORE PUSHONG CODE WE HAVE TO PULL BECAUSE OF CONSISTENCY AND HERE MERGE CONFLICT OCCURS
+  19   git push origin master		-- PUSH TO ORIGIN & ALSO WHICH BRANCH NEED TO SEND GIVE THAT BRANCH NAME
+  19.1 git remote add repo1 <url>       -- IF U WANT TO SEND CODE TO ANOTHER REPOSITORY 
+  20   git remote -v
+  21   git remote rename origin repo1   -- IT RENAME ORIGIN AS A REPO1
+  22   git remote remove origin         -- IT REMOVES ORIGIN PATH FORM SYSTEM
+  23   git log 				-- TRACKING OR VIEWING HISTORY & IT SHOWS ALL COMMIT ID'S
+  24   git log -2   			-- IT SHOWS LAST 2 COMMIT ID'S
+  25   git log --pretty=online          -- IT SHOWS ALL COMMITS IN ONE LINE & WHAT IS COMMIT ID & WHAT YOU COMMIT & AND NOW YOU PRESENT IN WHICH BRANCH
+  26   git push -u origin <branch name> -- THIS COMMAND IS USED TO PUSH BRANCHES(FOLDERS)
+  27   git branch 			-- TO SEE BRANCH LIST
+  28   git branch hotfix		-- THIS CMD CREATES AN HOTFIX BRANCH
+  29   git checkout hotfix              -- TO SWITCH DIRECTORY FROM MASTER TO HOTFIX
+  30   git branch -d hotfix             -- To delete branch
+			(or)
+  30   git branch -D hotfix             -- THIS COMMAND DELETES TH BRANCH HOTFIX
+BRANCHING 
+=========
+1.Hotfix Branch    ---   Master branch created automatically
+2.Release Branch   ---   
+3.Feature Branch   ---   Feature branch created by developer 
+4.Development Branch   ---   Development created by TL & Manager 
+  
+TAGGING
+=======  
+  31   git  tag -l 			-- To show list of tags
+  32   git tag -a v2.0 -m"giving release r2"   --    This command is to create tag
+						      a=anonatedS
+						      v=version
+  33   git show v2.0        		-- It shows all details of tag
+  34   git tag -a v2.1.0 f8671703 -m"tag for 2.10"    -- OKA COMMIT ID VARUKU TAG VEYYALII ANTE LAST LO COMMIT ID IVVALI 
+							 OTHERWISE IT TAKE UPTO LATEST COMMIT ID
+  							 f86171703 = COMMIT ID
+  35   git tag 				-- IT SHOWS ALL TAGS 
+  36   git push origin --tags   	-- TO PUSH ALL TAGS TO ORIGIN
+  37   git push origin v2.0		-- TO PUSH PARTICULAR TAG USE THIS COMMAND
+  38   git checkout -b v3.0 release-1.0 -- release-1.0 lo vuna data v3.0 ane branch loki vasthadhi v3.0 ane branch create avvuthadhi
+					   -b=branch
+  39   git checkout -b development      -- okesari branch create ayyi aa branch checkout avvali ante USE THIS COMMAND
+  40   git stash                        -- 1) THIS CMD CLEAR CONFUSION BETWEEN TWO BRANCHES
+					   2) THIS CMD IS TO STORE INNCOMPLETE WORK IF YOU WANT TO MOVE TO ANOTHER BRANCH (OR) WORK.
+					   3) THIS CMD IS TO HIDE FILES
+  41   git stash pop			-- TO RETAIN GIT STASH
+  42   git revert <commitid>            -- IT REVERT WHAT YOU DID THAT IN COMMIT 
+					   IF YOU WANT IT BACK AFTER  REVERT COMMIT AGAIN REVERT IT
+
+  
+
+
+
+
+
+
+$ git help -a
+See 'git help <command>' to read about a specific subcommand
+
+Main Porcelain Commands
+   add                  Add file contents to the index
+   am                   Apply a series of patches from a mailbox
+   archive              Create an archive of files from a named tree
+   bisect               Use binary search to find the commit that introduced a bug
+   branch               List, create, or delete branches
+   bundle               Move objects and refs by archive
+   checkout             Switch branches or restore working tree files
+   cherry-pick          Apply the changes introduced by some existing commits
+   citool               Graphical alternative to git-commit
+   clean                Remove untracked files from the working tree
+   clone                Clone a repository into a new directory
+   commit               Record changes to the repository
+   describe             Give an object a human readable name based on an available ref
+   diff                 Show changes between commits, commit and working tree, etc
+   fetch                Download objects and refs from another repository
+   format-patch         Prepare patches for e-mail submission
+   gc                   Cleanup unnecessary files and optimize the local repository
+   gitk                 The Git repository browser
+   grep                 Print lines matching a pattern
+   gui                  A portable graphical interface to Git
+   init                 Create an empty Git repository or reinitialize an existing one
+   log                  Show commit logs
+   merge                Join two or more development histories together
+   mv                   Move or rename a file, a directory, or a symlink
+   notes                Add or inspect object notes
+   pull                 Fetch from and integrate with another repository or a local branch
+   push                 Update remote refs along with associated objects
+   range-diff           Compare two commit ranges (e.g. two versions of a branch)
+   rebase               Reapply commits on top of another base tip
+   reset                Reset current HEAD to the specified state
+   revert               Revert some existing commits
+   rm                   Remove files from the working tree and from the index
+   shortlog             Summarize 'git log' output
+   show                 Show various types of objects
+   stash                Stash the changes in a dirty working directory away
+   status               Show the working tree status
+   submodule            Initialize, update or inspect submodules
+   tag                  Create, list, delete or verify a tag object signed with GPG
+   worktree             Manage multiple working trees
+
+Ancillary Commands / Manipulators
+   config               Get and set repository or global options
+   fast-export          Git data exporter
+   fast-import          Backend for fast Git data importers
+   filter-branch        Rewrite branches
+   mergetool            Run merge conflict resolution tools to resolve merge conflicts
+   pack-refs            Pack heads and tags for efficient repository access
+   prune                Prune all unreachable objects from the object database
+   reflog               Manage reflog information
+   remote               Manage set of tracked repositories
+   repack               Pack unpacked objects in a repository
+   replace              Create, list, delete refs to replace objects
+
+Ancillary Commands / Interrogators
+   annotate             Annotate file lines with commit information
+   blame                Show what revision and author last modified each line of a file
+   count-objects        Count unpacked number of objects and their disk consumption
+   difftool             Show changes using common diff tools
+   fsck                 Verifies the connectivity and validity of the objects in the database
+   gitweb               Git web interface (web frontend to Git repositories)
+   help                 Display help information about Git
+   instaweb             Instantly browse your working repository in gitweb
+   merge-tree           Show three-way merge without touching index
+   rerere               Reuse recorded resolution of conflicted merges
+   show-branch          Show branches and their commits
+   verify-commit        Check the GPG signature of commits
+   verify-tag           Check the GPG signature of tags
+   whatchanged          Show logs with difference each commit introduces
+
+Interacting with Others
+   archimport           Import a GNU Arch repository into Git
+   cvsexportcommit      Export a single commit to a CVS checkout
+   cvsimport            Salvage your data out of another SCM people love to hate
+   cvsserver            A CVS server emulator for Git
+   imap-send            Send a collection of patches from stdin to an IMAP folder
+   p4                   Import from and submit to Perforce repositories
+   quiltimport          Applies a quilt patchset onto the current branch
+   request-pull         Generates a summary of pending changes
+   send-email           Send a collection of patches as emails
+   svn                  Bidirectional operation between a Subversion repository and Git
+
+Low-level Commands / Manipulators
+   apply                Apply a patch to files and/or to the index
+   checkout-index       Copy files from the index to the working tree
+   commit-graph         Write and verify Git commit-graph files
+   commit-tree          Create a new commit object
+   hash-object          Compute object ID and optionally creates a blob from a file
+   index-pack           Build pack index file for an existing packed archive
+   merge-file           Run a three-way file merge
+   merge-index          Run a merge for files needing merging
+   mktag                Creates a tag object
+   mktree               Build a tree-object from ls-tree formatted text
+   multi-pack-index     Write and verify multi-pack-indexes
+   pack-objects         Create a packed archive of objects
+   prune-packed         Remove extra objects that are already in pack files
+   read-tree            Reads tree information into the index
+   symbolic-ref         Read, modify and delete symbolic refs
+   unpack-objects       Unpack objects from a packed archive
+   update-index         Register file contents in the working tree to the index
+   update-ref           Update the object name stored in a ref safely
+   write-tree           Create a tree object from the current index
+
+Low-level Commands / Interrogators
+   cat-file             Provide content or type and size information for repository objects
+   cherry               Find commits yet to be applied to upstream
+   diff-files           Compares files in the working tree and the index
+   diff-index           Compare a tree to the working tree or index
+   diff-tree            Compares the content and mode of blobs found via two tree objects
+   for-each-ref         Output information on each ref
+   get-tar-commit-id    Extract commit ID from an archive created using git-archive
+   ls-files             Show information about files in the index and the working tree
+   ls-remote            List references in a remote repository
+   ls-tree              List the contents of a tree object
+   merge-base           Find as good common ancestors as possible for a merge
+   name-rev             Find symbolic names for given revs
+   pack-redundant       Find redundant pack files
+   rev-list             Lists commit objects in reverse chronological order
+   rev-parse            Pick out and massage parameters
+   show-index           Show packed archive index
+   show-ref             List references in a local repository
+   unpack-file          Creates a temporary file with a blob's contents
+   var                  Show a Git logical variable
+   verify-pack          Validate packed Git archive files
+
+Low-level Commands / Synching Repositories
+   daemon               A really simple server for Git repositories
+   fetch-pack           Receive missing objects from another repository
+   http-backend         Server side implementation of Git over HTTP
+   send-pack            Push objects over Git protocol to another repository
+   update-server-info   Update auxiliary info file to help dumb servers
+
+See 'git help <command>' to read about a specific subcommand
+
+Main Porcelain Commands
+   add                  Add file contents to the index
+   am                   Apply a series of patches from a mailbox
+   archive              Create an archive of files from a named tree
+   bisect               Use binary search to find the commit that introduced a bug
+   branch               List, create, or delete branches
+   bundle               Move objects and refs by archive
+   checkout             Switch branches or restore working tree files
+   cherry-pick          Apply the changes introduced by some existing commits
+   citool               Graphical alternative to git-commit
+   clean                Remove untracked files from the working tree
+   clone                Clone a repository into a new directory
+   commit               Record changes to the repository
+   describe             Give an object a human readable name based on an available ref
+   diff                 Show changes between commits, commit and working tree, etc
+   fetch                Download objects and refs from another repository
+   format-patch         Prepare patches for e-mail submission
+   gc                   Cleanup unnecessary files and optimize the local reposit
+:...skipping...
+See 'git help <command>' to read about a specific subcommand
+
+Main Porcelain Commands
+   add                  Add file contents to the index
+   am                   Apply a series of patches from a mailbox
+   archive              Create an archive of files from a named tree
+   bisect               Use binary search to find the commit that introduced a bug
+   branch               List, create, or delete branches
+   bundle               Move objects and refs by archive
+   checkout             Switch branches or restore working tree files
+   cherry-pick          Apply the changes introduced by some existing commits
+   citool               Graphical alternative to git-commit
+   clean                Remove untracked files from the working tree
+   clone                Clone a repository into a new directory
+   commit               Record changes to the repository
+   describe             Give an object a human readable name based on an available ref
+   diff                 Show changes between commits, commit and working tree, etc
+   fetch                Download objects and refs from another repository
+   format-patch         Prepare patches for e-mail submission
+   gc                   Cleanup unnecessary files and optimize the local repository
+   gitk                 The Git repository browser
+   grep                 Print lines matching a pattern
+   gui                  A portable graphical interface to Git
+   init                 Create an empty Git repository or reinitialize an existing one
+   log                  Show commit logs
+   merge                Join two or more development histories together
+   mv                   Move or rename a file, a directory, or a symlink
+   notes                Add or inspect object notes
+   pull                 Fetch from and integrate with another repository or a local branch
+   push                 Update remote refs along with associated objects
+   range-diff           Compare two commit ranges (e.g. two versions of a branch)
+   rebase               Reapply commits on top of another base tip
+   reset                Reset current HEAD to the specified state
+   revert               Revert some existing commits
+   rm                   Remove files from the working tree and from the index
+   shortlog             Summarize 'git log' output
+   show                 Show various types of objects
+   stash                Stash the changes in a dirty working directory away
+   status               Show the working tree status
+   submodule            Initialize, update or inspect submodules
+   tag                  Create, list, delete or verify a tag object signed with GPG
+   worktree             Manage multiple working trees
+
+Ancillary Commands / Manipulators
+   config               Get and set repository or global options
+   fast-export          Git data exporter
+   fast-import          Backend for fast Git data importers
+   filter-branch        Rewrite branches
+   mergetool            Run merge conflict resolution tools to resolve merge conflicts
+
+
+ 
+   
+ 

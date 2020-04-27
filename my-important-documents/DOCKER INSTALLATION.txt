@@ -1,0 +1,144 @@
+DOCKER INSTALLATION
+===================
+https://get.docker.com/
+ubuntu@ip-172-31-25-31:~$    
+=========================
+=========================
+    1  sudo apt-get update
+    2  curl -fsSL https://get.docker.com -o get-docker.sh    --THIS IS SCRIPT TO INSTALL DOCKER
+						(OR)
+    2.1 sudo apt-get install docker.io
+    3  sh get-docker.sh                                     
+    4  sudo usermod -aG docker ubuntu                        --	WITH THIS COMMAND WE USE TO GIVE SUDO PERMISSION FOR UBUNTU
+    5  docker --version
+    6  docker info
+    7  exit
+    8  docker info                              -- TO CHECK DOCKER RUNNING OR NOT
+    9  docker run hello-world    		--TO RUN IMAGE FILE AS CONTAINER
+   10  docker ps                                --TO SEE RUNNING CONTAINERS 
+   11  docker run -d -p 8080:8080 jenkins       --"-d" IS DEATTACHED MODE -DEAMON WILL RUN IN BACKGROUND
+						--"-P" IS PORT 
+						--"THIS COMMAND USED TO RUN JENKINS IMAGE FILE"  
+   12  docker run -d -p 8087:8081 jenkins
+   13  docker ps
+   14  docker run -d -p 8085:8082 --name manikanta jenkins
+   15  docker ps                                           
+   16  docker images				--IT IS USED TO SEE IMAGES IN DOCKER
+   17  docker pull nginx                        --THIS COMMAND IS USED TO DOWNLOAD IMAGE FILE WITHOUT RUN
+   18  docker images
+   19  docker run -d -p 80:80 --name myname nginx    --"--name" IT IS TO PUT NAME FOR CONTAINER
+   20  docker ps
+   21  docker images
+   22  docker ps
+   23  docker stop 03067795b4a9                  -- BEFORE DELETING CONTAINER WE MUST STOP CONTAINER WITH CONTAINER ID(DOCKER PS)
+   24  docker ps
+   25  docker rm 03067795b4a9                    -- AFTER STOPPING CONTAINER USE THIS COMMAND TO REMOVE CONTAINER WITH CONTAINER ID
+   26  docker ps
+   27  docker images
+   28  docker ps -a                              -- TO SEE RUNNING AND NON-RUNNING CONTAINERS ALL DATA
+   29  docker ps
+   30  docker rm -f $(docker ps -a -q)           -- THIS COMMAND REMOVE ALL THE CONTAINERS IN DOCKER   
+   31  docker ps
+   32  docker run -d -p 8080:8080 jenkins
+   33  docker ps
+   34  docker images
+   35  docker rmi -f cd14cecfdb3a                -- IT IS TO REMOVE IMAGE FILE WITH IMAGE ID(docker images)
+   36  docker images
+   37  docker run -d nginx
+   38  docker images
+   39  docker run -d nginx:1.14-perl             -- SAME APPLICATION WITH DIFFERENT VERSION
+   40  docker pull jenkins
+   41  docker images
+   42  docker ps
+   43  docker run -d -p 8080:8080 jenkins
+   44  docker ps
+   45  docker inspect jenkins                   -- FULL DETAILS OF JENKINS (SIZE CONSUMED, DATA RECIEVING)
+   46  docker run -it nginx /bin/bash		-- ITERATIVE MODEL ARE ALWAYS RUNS ON BASH SCRIPTS
+						   THIS COMMAND IS USED TO ENTER INTO THE CONTAINER 
+
+=====================================================================================================
+AFTER ENTERING -- docker run -it nginx /bin/bash
+		  docker run -it jenkins /bin/bash
+
+ root@3d03911bf4b9  1  ls
+                    2  cd /var
+                    3  ls                                        ------ IT IS MANUAL METHOD
+                    4  touch test.txt
+                    5  ls
+                    6  exit
+=====================================================================================================
+* WE ARE GOING TO DO AUTOMATION METHOD 1-CREATE IMAGE FILE IN THAT CREATE NGINX IN THAT CREATE vi Dockerfile THEN WRITE YOUR NEED 
+ubuntu@ip-172-31-25-31:~$  57  mkdir images
+   47  cd images/
+   48  mkdir nginx
+   49  cd nginx/
+   50  vi Dockerfile
+ 			  FROM nginx
+			  MAINTAINER manikanta
+      			  RUN cd /var && touch merge.txt
+			  CMD ["echo","My-first-image"]
+   51  docker build -t myfirstimage .   -- THIS COMMAND IS USED TO BUILD IMAGE WITH OUR WRITTEN DOCKER FILE 
+					-- "." IS SAID THAT BUILD IMAGE WITH THIS FILE
+					-- "myfirstimage" IS WE ARE PUTTING IMAGE NAME
+   52  docker run -it myfirstimage /bin/bash
+===========================================================================================================
+root@140906e498a4:/#1  ls
+    		    2  cd /var/
+    		    3  ls        --- CHECK "merge.txt" PRESENT OR NOT
+     		    4  ctrl+pq
+===========================================================================================================
+   53  docker ps
+   54  docker images
+   55  docker ps -a
+ 
+   56  netstat -a     --TO CHECK CONNECTIONS
+   57  docker images
+   58  docker info
+   59  docker ps
+   60  docker images
+   61  mkdir iputilsimage
+   62  ls
+   63  cd iputilsimage/
+   64  ls
+   65  vi Dockerfile
+       FROM ubuntu:16.04
+       MAINTAINER manikanta
+       RUN apt-get update && apt-get install iputils-ping -y
+       CMD ["echo","created]
+   65  docker build -t uputilsimage .
+   66  docker images
+   67  docker ps
+   68  docker run -it uputilsimage /bin/bash
+root@4006efae2295:/#
+   69  ping
+   70  ctrl+pq
+   71  docker run -d -p 8182:8080 tomcat
+
+
+
+
+
+docker swarm join --token SWMTKN-1-1kyx4d1y59btqf3kvh5mnj6u52zpprgrdp96fgaab7mhhkt142-9ssr60516mm3ymnd0ocaqigf3 172.31.25.31:2377
+
+
+
+   
+
+   
+
+   
+  
+   
+
+   
+
+
+-d -- detached
+-f --filter
+-m --memory
+-p --port
+-f --forcefully
+--name --container name
+$ --oka cmd lo inko command rayyadaniki
+example: docker rm -f $(docker ps -a -q)
+

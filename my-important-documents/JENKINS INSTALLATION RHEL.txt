@@ -1,0 +1,230 @@
+    						JENKINS SETUP IN RHEL
+						======================
+    1  yum update
+JAVA INSTALLATION
+=================
+    2  yum install java-1.8*
+    3  vi .bash_profile
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64
+PATH=$PATH:$JAVA_HOME:$HOME/bin
+      			or
+JAVA_HOME=/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64
+PATH=$PATH:$JAVA_HOME:$HOME/bin
+	   $JAVA_HOME:   -- WE ADD THIS
+			or
+JAVA_HOME=/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64
+M2_HOME="/opt/apache-maven-3.6.1"
+M2=$M2_HOME/bin
+PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
+
+    4  source .bash_profile
+    5  yum install wget
+    6  java -version
+MAVEN INSTALLATION
+==================
+    7  wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+    8  ls
+    9  mv apache-maven-3.6.1-bin.tar.gz /opt
+   10  ls
+   11  cd /opt
+   12  ls
+   13  tar -xzvf apache-maven-3.6.1-bin.tar.gz
+   14  ls
+   15  cd apache-maven-3.6.1
+   16  ls
+   17  cd
+   18  vi .bash_profile
+M2_HOME="/opt/apache-maven-3.6.1"
+PATH=$M2_HOME/bin:$PATH
+   19  source ~/.bash_profile
+   20  mvn --version
+GIT INSTALLATION
+================
+   21  yum install git
+   22  git --version
+JENKINS INSTALLATION
+====================
+   23  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+   24  sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+   25  yum install jenkins
+   26  service jenkins stop
+   27  service jenkins status
+   28  service jenkins start
+   29  service jenkins restart
+
+OPEN PORT WITH 8080
+   30  vi /var/lib/jenkins/secrets/initialAdminPassword  -- OPEN THIS AND COPY KEY AND PASTE AT BROWSER
+   31  SELECT INSTALL SUGGESTED PLUGINS
+ AND SET USERNAME  admin
+	 PASSWORD  admin
+UPTO NOW INSTALATION IS COMPLETED 
+
+
+goto global configuration tool
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64
+===================================================================================================================================================================
+1 after open jenkins 
+  change password -admin-configure-apply-save
+2. manage jenkins-global tool configuration-add java path-apply-save
+3. new item-give name -freestyle project- ok give description- and in build select execute shell and give echo " this is valaxy technologies"
+   build job 
+   check output
+4. open manage plugin and search for maven invoker --- to use maven we need maven invoker plugin - to show maven project
+				     git hub       --- to use git we need github plugin  - to show git option
+				     greenballs    --- when job run success the ball status will turn green 
+				     blueocean	   --- it is a visual gui for jenkins
+				     Role-based    --- it is used to assign roles for users[it is in MANAGEJENKINS - CONFIGURE GLOBAL SECURITY - ACESS CONTROL,AUTHURISATION LO CHECK Role-based strategy
+				     Deploy to container --- by install this plugin in post build action appears deploy to container
+				     monitoring	   
+				     thin backup
+				     aws
+				     
+5.  add maven path to global tool configuration
+6.  [MANAGE JENKINS - MANAGE USERS - CREATE USER]
+    Add users (deve,teste&jenkins)
+7.1  [MANAGE JENKINS - MANAGE AND ASSIGN ROLES - MANAGE ROLES]
+     in global role add role EMPLOYEE, pls check all read permissions for that employee
+7.2  in project roles
+     add role DEVELOPERS |
+	      DEV.*      |
+	      ========== |________ give job,run,scm level access to developer and tester don't give credential acess {apply&save} 
+	      TESTERS    |
+	      TEST.*     |
+	      ========== |
+8.1 Go back and select ASSIGN ROLES
+    in global role you have EMPLOYEE and ADMIN rows , now u add users(DEVE,TESTE,JENKINS), check empolyee for DEVE & TESTE users,check admin for JENKINS user.
+    [this is for we are giving read permissions for our teste and deve users]
+8.2 in item roles you have DEVELOPERS and TESTERS rows , now u add users(DEVE,TESTE), check developers for DEVE user & testers for TESTE user {apply&save}
+8.3 create some dummy project like DEV-DAY & TESTERS-HAPPY with freestyle project.
+     Now check developer can acess DEV-DAY project , tester can acess TESTERS-HAPPY project
+=====================================================================================================================================================================
+
+NOW IN SLAVE SERVER
+
+ 1  yum update
+JAVA INSTALLATION
+=================
+    2  yum install java-1.8*
+    3  vi .bash_profile
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64
+PATH=$PATH:$JAVA_HOME:$HOME/bin
+      			or
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64
+PATH=$PATH:$JAVA_HOME:$HOME/bin
+	   $JAVA_HOME:   -- WE ADD THIS
+			or
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64
+M2_HOME="/opt/apache-maven-3.6.1"
+M2=$M2_HOME/bin
+PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
+
+    4  source .bash_profile
+    5  yum install wget
+    6  java -version
+MAVEN INSTALLATION
+==================
+    7  wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+    8  ls
+    9  mv apache-maven-3.6.1-bin.tar.gz /opt
+   10  ls
+   11  cd /opt
+   12  ls
+   13  tar -xzvf apache-maven-3.6.1-bin.tar.gz
+   14  ls
+   15  cd apache-maven-3.6.1
+   16  ls
+   17  cd
+   18  vi .bash_profile
+M2_HOME="/opt/apache-maven-3.6.1"
+PATH=$M2_HOME/bin:$PATH
+   19  source ~/.bash_profile
+   20  mvn --version
+GIT INSTALLATION
+================
+   21  yum install git
+   22  git --version
+   23  useradd jenkins-slave-01
+   24  su - jenkins-slave-01 
+jenkins-slave-01]$  	1  ssh-keygen -t rsa -N "" -f /home/jenkins-slave-01/.ssh/id_rsa
+    			2  ls
+  			3  ls -l
+    			4  cd .ssh
+ 			5  cat id_rsa.pub > authorized_keys
+    			6  chmod 700 authorized_keys
+    			7  ls -l
+    			8  more id_rsa
+========================================================================================
+Configuration in master server
+root]#  67  mkdir -p /var/lib/jenkins/.ssh
+        68  cd /var/lib/jenkins/.ssh
+   	69  pwd
+   	70  ssh-keyscan -H 172.31.0.8 >>/var/lib/jenkins/.ssh/known_hosts 
+   	71  ls -l
+   	72  chown jenkins:jenkins /var/lib/jenkins/.ssh/known_hosts      --- Here we change user and group root to jenkins
+   	73  ls -l
+   	74  chmod 700 /var/lib/jenkins/.ssh/known_hosts                  ---Here we add rwx permissions for user jenkins
+   	75  ls -l
+   	76  history
+========================================================================================
+IN jenkins gui
+9.1  goto - MANAGE JENKINS - MANAGE NODES - NEW NODE
+10.1 IN BUILD ROOT POM = pom.xml & GOALS AND OPTIONS = clean install package
+
+
+https://github.com/miztiik/DevOps-Demos/tree/master/setup-jenkins-slave
+https://github.com/wakaleo/game-of-life
+
+   #!/bin/bash
+echo "_______________________________"
+echo "|                             |"
+echo "|   Welcome to Valaxy Demo    |"
+echo "|           _nnnn_            |"
+echo "|          dGGGGMMb           |"
+echo "|         @p~qp~~qMb          |"
+echo "|         M|@||@) M|          |"
+echo "|         @,----.JM|          |"
+echo "|        JS^\__/  qKL         |"
+echo "|       dZP        qKRb       |"
+echo "|      dZP          qKKb      |"
+echo "|     fZP            SMMb     |"
+echo "|     HZM            MMMM     |"
+echo "|     FqM            MMMM     |"
+echo "|   __| '.        |\dS'qML    |"
+echo "|   |    '.       | ' \Zq     |"
+echo "|  _)      \.___.,|     .'    |"
+echo "|  \____   )MMMMMP|   .'      |"
+echo "|       '-'       '--' hjm    |"
+echo "_______________________________"
+
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAtNQPjSmiDWfI/l3vC+qV9udokPreaqKjQqU8i8ZmdmjnIqdB
+ruTNycxxDrwubsB/GKA8mt/z5TwOeZPT9c3U2PwjBs/+4ClQROfYhaL63RlWp2uO
+4zHjVH4R7VdWj2ZdR7R+tAXZBTmgV+o7W2rOdVzL+0lXAIhfWTpxloQrMsqFzu+E
+xZrZmbSAg5G7tohBQkB/ewQO3MsZxGnEICsAOdC5tf2Mapilr0iSanI2qIg/Ygeg
+AOvh3ncK+iUEgNGz7Gx2FY9sDEoWFmIKNGHzLahi8dZ8rt1Ly04lXF8PTZRSd9mU
+GuHTHpXrB8H5lyv9mPLgOP8e7gmZXiL74hBLRQIDAQABAoIBAQCM6UuNF0pe4+du
+wMhNIurl0oJbqAK2WjKa9qRtz5d84lZrXKcEoOv0O0pGz0HnsD3adNOFZMtscRZe
+i2H7BAC/bgvlfSQCjm8sovbJfK28qcgrAtgAF5os92kE6LBdYsmB3Rd3Na9eMP/Q
+QokqvdpQ/pU+JnKTybFzmOV3A1ueYX5WGa2FwXG6ZoxGL5YQ9SWtQ4TqfoPbb9zE
+QvAb5ljhawv84czU8xOQqQJGPz90kmI14PSySW0fBXSKY40UpGKTx1yoVoNQcwYh
+e4sqkhKdYaVoyRGO0W2lfb0/yzAtWA7BnCzxlWUkM+F4N3CPTJW1o6L8C1Ek5TfA
+qZjwe9NpAoGBAO2U4ZEluX8vojxO/bWn3i+gW2rJQPm631qa6b3Z7ceCTQQ/9hAV
+YejT5uSEcJET6oc6NR+qm0rVxk19+EXjOYDB4yO7YyxTSMUvuPUJUzTA1keV1vgN
+7YyAnhicNchQ2cxgP3lEjT5TxabVlWwpiiTwqInCk1TnK3oSj6M1607vAoGBAMLY
+1mwsZvmb/JkY5gz43OefqceEs1IeGkOJoCoND8rUOk4wbv/7v0ME2A4gYxXvzGTa
+TLLeh7FeWuJmSevcCSaLFPQ8GcODMmNBTWBoniHKREXVxmGcPVoZqAF0S+KjyBZ1
+3d02QySwiq5s28YCGnzSthu3Cyr7YG4Lt3hXqokLAoGAaFbQUZyNwMu8plvSlKrq
+q2Pzggxs2sA1Q2dxbA1/nfUdudYVTK73VvdpGccIYM6sW0M2/XdByDXmZzYBiT/n
+iyKbjJ/JSDgzZ1Y0FnlH740ZDktCI6KKRwBdblV8UUMgw98pQSrYFR1ZWpHGk8AS
+iXKfshCf/9OehngMWRNfCkUCgYBH3MeAkAPOrcxE/tziDesTdlyc3IFymO2g2SJ8
+P+MCMLHsYoqd2NCavC+fTiydS5r721OMaOxs61rjw0wiND4fvA4XYg8yf7HWz5/l
+HdCsr7fsdcK7/27VSz8egjD2vuct+XzBeKDc6EvNtxJ7fg0c2m4V3LW+vYW8MJAT
+T2nzLwKBgQDUztHWTX8ucUpFxYoJ4baS7huFFZk4GrluVFMyAJEAzJTp7HaNgRzJ
+2GN9ReefZquYREnIAijmuYRjlRKx/r5LTN3Gvde2u8kVsnd3sxOPjDS6Jq/dwc14
+Bxkyspev0qRSt59VSV7TlfBS7ZyrJzxdfKXsCejuAnOurizGOvfApg==
+-----END RSA PRIVATE KEY-----
+
+
+
+
+

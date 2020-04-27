@@ -1,0 +1,127 @@
+                                                                   NEXUS SETUP IN UBUNTU
+                                                                   =====================
+    1  apt-get update
+JAVA INSTALL:
+=============
+    2  sudo apt-get install openjdk-8-jre
+    3  sudo apt-get install openjdk-8-jdk -y
+    4  java -version
+    5  which java
+ENVIRONMENTAL VARIABLE
+======================
+    6  vi /etc/environment
+JAVA_HOME=/usr/lib/jvm/openjdk-8-jdk
+JRE_HOME=/usr/lib/jvm/openjdk-8-jdk/jre
+    7  source /etc/environment
+    8  which java
+    9  echo $JAVA_HOME
+MAVEN INSTALL:
+=============
+   10  sudo apt policy maven
+   11  sudo apt install maven
+ENVIRONMENTAL VARIABLE
+======================
+   12  vi /etc/environment
+MAVEN_HOME=/usr/share/maven
+   13  source /etc/environment
+   14  echo $MAVEN_HOME
+   15  mvn -version
+   16  cd /opt
+   17  ls
+NEXUS INSTALL
+=============
+
+   18  wget https://sonatype-download.global.ssl.fastly.net/repository/repositoryManager/3/nexus-3.16.1-02-unix.tar.gz
+   19  ls
+   20  tar -xzvf nexus-3.16.1-02-unix.tar.gz
+   21  ls
+   22  sudo mv nexus-3.16.1-02 nexus
+   23  cd /opt
+   24  sudo adduser nexus
+   25   visudo
+nexus ALL=(ALL:ALL) NOPASSWD:ALL
+   26  sudo chown -R nexus:nexus /opt/nexus
+   27  sudo vi /opt/nexus/bin/nexus.rc
+#run_as_user="nexus"
+   28  sudo vi /opt/nexus/bin/nexus.vmoptions
+-Xms256M
+-Xmx256M
+-XX:+UnlockDiagnosticVMOptions
+-XX:+UnsyncloadClass
+-Djava.net.preferIPv4Stack=true
+-Dkaraf.home=.
+-Dkaraf.base=.
+-Dkaraf.etc=etc                             
+-Djava.util.logging.config.file=etc/java.util.logging.properties
+-Dkaraf.data=/opt/nexus/nexus-data
+-Djava.io.tmpdir=data/tmp
+-Dkaraf.startLocalConsole=false
+   29  sudo ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+nexus service ga run avvalii ante ln -s cheyyalii
+   30  sudo su - nexus
+   31  cd /opt/nexus/bin
+   32  ./nexus status
+   33  ./nexus start
+
+ACCESS THE SONARQUBE WITH
+http://<ipaddress>:8081
+
+
+
+
+
+
+Download and Install Nexus
+sudo wget http://www.sonatype.org/downloads/nexus-latest-bundle.zip
+sudo chmod 777 nexus-2.11.4-01-bundle.zip
+sudo unzip nexus-2.11.4-01-bundle.zip
+cd nexus-2.11.4-01/bin
+sudo RUN_AS_USER=root ./nexus start
+Config nexus on Maven
+sudo vim $M2_HOME/conf/settings.xml
+    <server>
+      <id>nexus</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+Goto: http://127.0.0.1:8081/nexus/#welcome
+
+
+A DEFAULT USER WITH ADMINISTER SYSTEM PERMISSION IS CREATED AUTOMATICALLY
+Login : admin
+Password : admin123
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
